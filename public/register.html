@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <style>
+        body { background: #0f172a; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .box { background: #1e293b; padding: 30px; border-radius: 15px; width: 300px; text-align: center; }
+        input { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; }
+        button { width: 100%; padding: 10px; background: #22c55e; border: none; color: white; cursor: pointer; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Register</h2>
+        <input type="text" id="u" placeholder="New Username">
+        <input type="password" id="p" placeholder="New Password">
+        <button onclick="doReg()">Sign Up</button>
+        <p><a href="login.html" style="color:#94a3b8">กลับหน้า Login</a></p>
+    </div>
+    <script>
+        async function doReg() {
+            const res = await fetch('/api/register', {
+                method: 'POST', headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({username: u.value, password: p.value})
+            });
+            if(res.ok) { alert('สมัครสำเร็จ!'); location.href='login.html'; }
+            else alert('ชื่อนี้ใช้ไม่ได้');
+        }
+    </script>
+</body>
+</html>
